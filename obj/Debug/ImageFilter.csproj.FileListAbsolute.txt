@@ -21,3 +21,26 @@ C:\Users\User\Desktop\ImageFilter\obj\Debug\ImageFil.24268681.Up2Date
 C:\Users\User\Desktop\ImageFilter\obj\Debug\ImageFilter.exe
 C:\Users\User\Desktop\ImageFilter\obj\Debug\ImageFilter.pdb
 C:\Users\User\Desktop\ImageFilter\obj\Debug\ImageFilter.Form2.resources
+E:\Github Repo\ImageFilter\ImageFilter\bin\Debug\Accord.dll.config
+E:\Github Repo\ImageFilter\ImageFilter\bin\Debug\ImageFilter.exe.config
+E:\Github Repo\ImageFilter\ImageFilter\bin\Debug\ImageFilter.exe
+E:\Github Repo\ImageFilter\ImageFilter\bin\Debug\ImageFilter.pdb
+E:\Github Repo\ImageFilter\ImageFilter\bin\Debug\Accord.dll
+E:\Github Repo\ImageFilter\ImageFilter\bin\Debug\Accord.Imaging.dll
+E:\Github Repo\ImageFilter\ImageFilter\bin\Debug\Accord.Math.Core.dll
+E:\Github Repo\ImageFilter\ImageFilter\bin\Debug\Accord.Math.dll
+E:\Github Repo\ImageFilter\ImageFilter\bin\Debug\Accord.Statistics.dll
+E:\Github Repo\ImageFilter\ImageFilter\bin\Debug\Accord.xml
+E:\Github Repo\ImageFilter\ImageFilter\bin\Debug\Accord.Imaging.xml
+E:\Github Repo\ImageFilter\ImageFilter\bin\Debug\Accord.Math.xml
+E:\Github Repo\ImageFilter\ImageFilter\bin\Debug\Accord.Math.Core.xml
+E:\Github Repo\ImageFilter\ImageFilter\bin\Debug\Accord.Statistics.xml
+E:\Github Repo\ImageFilter\ImageFilter\obj\Debug\ImageFilter.csproj.AssemblyReference.cache
+E:\Github Repo\ImageFilter\ImageFilter\obj\Debug\ImageFilter.Form1.resources
+E:\Github Repo\ImageFilter\ImageFilter\obj\Debug\ImageFilter.Form2.resources
+E:\Github Repo\ImageFilter\ImageFilter\obj\Debug\ImageFilter.Properties.Resources.resources
+E:\Github Repo\ImageFilter\ImageFilter\obj\Debug\ImageFilter.csproj.GenerateResource.cache
+E:\Github Repo\ImageFilter\ImageFilter\obj\Debug\ImageFilter.csproj.CoreCompileInputs.cache
+E:\Github Repo\ImageFilter\ImageFilter\obj\Debug\ImageFil.24268681.Up2Date
+E:\Github Repo\ImageFilter\ImageFilter\obj\Debug\ImageFilter.exe
+E:\Github Repo\ImageFilter\ImageFilter\obj\Debug\ImageFilter.pdb

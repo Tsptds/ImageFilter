@@ -10,7 +10,9 @@ namespace ImageFilter
         {
             InitializeComponent();
         }
-        string ImageFile;
+        string ImagePath;
+        static OpenFileDialog openFileDialog1;
+        static SaveFileDialog saveFileDialog1;
         public static Bitmap image;
         public static double kernelSum;
         public static double intensity = 1;
@@ -75,18 +77,12 @@ namespace ImageFilter
 
         private void button2_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-
-            openFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            openFileDialog1.Filter = "Image files (*.jpg, *.jpeg, *.png)|*.jpg;*.jpeg;*.png";
-
-            if (openFileDialog1.ShowDialog() != DialogResult.OK)
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                return;
+                ImagePath = openFileDialog1.FileName;
+                image = Util.LoadBitmapNolock(ImagePath);
+                pictureBox1.Image = image;
             }
-            ImageFile = openFileDialog1.FileName;
-            image = new Bitmap(ImageFile);
-            pictureBox1.Image = image;
         }
 
         private void btnImgSave_Click(object sender, EventArgs e)
@@ -98,8 +94,12 @@ namespace ImageFilter
                 MessageBox.Show("No processed image");
                 return;
             }
-            IMGout.Save("out.jpg");
-            MessageBox.Show("Image Saved as \"out.jpg\"");
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                ImagePath = saveFileDialog1.FileName;
+                IMGout.Save(ImagePath);
+                MessageBox.Show("Image Saved at "+ImagePath);
+            }
         }
 
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
@@ -129,6 +129,22 @@ namespace ImageFilter
                 optionSlider.Enabled = false;
             }
             else optionSlider.Enabled = true;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.InitialDirectory = ImagePath;
+            openFileDialog1.Title = "Save Edited Image";
+            openFileDialog1.Filter = "Image files (*.jpg, *.jpeg, *.png *.bmp)|*.jpg;*.jpeg;*.png;*.bmp|jpeg|*.jpg|jpeg|*.jpeg|bitmap|*.bmp|png|*.png";
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.RestoreDirectory = true;
+
+            saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.InitialDirectory = ImagePath;
+            saveFileDialog1.Title = "Save Edited Image";
+            saveFileDialog1.Filter = "jpg|*.jpg|Bitmap|*.bmp|png|*.png";
+            saveFileDialog1.RestoreDirectory = true;
         }
     }
 }

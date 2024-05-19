@@ -281,6 +281,7 @@
             this.MinimumSize = new System.Drawing.Size(900, 540);
             this.Name = "Form1";
             this.Text = "ImageFilter";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.optionSlider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);

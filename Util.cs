@@ -348,5 +348,14 @@ namespace ImageFilter
             }
             return output;
         }
+
+        // No file lock bitmap load
+        public static Bitmap LoadBitmapNolock(string path)
+        {
+            using (var img = Image.FromFile(path))
+            {
+                return new Bitmap(img);
+            }
+        }
     }
 }
