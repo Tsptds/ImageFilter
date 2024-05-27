@@ -83,6 +83,7 @@
             // optionSlider
             // 
             this.optionSlider.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.optionSlider.Enabled = false;
             this.optionSlider.LargeChange = 1;
             this.optionSlider.Location = new System.Drawing.Point(114, 6);
             this.optionSlider.Maximum = 4;
@@ -170,10 +171,11 @@
             "Brightness",
             "Saturation",
             "Gamma",
-            "Box Blur",
             "Sharpen",
+            "Box Blur",
             "Gaussian Blur",
             "Motion Blur",
+            "Convert to Grayscale",
             "Highlight Edges",
             "Sobel",
             "Emboss"});
@@ -215,9 +217,10 @@
             // 
             this.sliderIntensity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.sliderIntensity.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.sliderIntensity.Enabled = false;
             this.sliderIntensity.LargeChange = 1;
             this.sliderIntensity.Location = new System.Drawing.Point(581, 6);
-            this.sliderIntensity.Maximum = 5;
+            this.sliderIntensity.Maximum = 1;
             this.sliderIntensity.Minimum = 1;
             this.sliderIntensity.Name = "sliderIntensity";
             this.sliderIntensity.Size = new System.Drawing.Size(290, 45);

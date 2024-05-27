@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
 using Accord.Imaging.Filters;
 
 
@@ -215,6 +216,7 @@ namespace ImageFilter
         // Change Saturation
         public static Bitmap Saturation(Bitmap image, double sFactor)
         {
+            if(sFactor == 0)    return image;
             Bitmap output = new Bitmap(image.Width, image.Height);
             for (int y = 0; y < image.Height; y++)
             {
@@ -223,10 +225,19 @@ namespace ImageFilter
                     Color pixel = image.GetPixel(x, y);
                     double hue, saturation, value;
                     ColorToHSV(pixel, out hue, out saturation, out value);
-
+                    
                     // Modify the saturation
-                    saturation += (sFactor / 10.0);
-                    saturation = Math.Min(saturation, 1.0); // Limit values
+                    if (sFactor > 0)
+                    {
+                        saturation += (sFactor / 10.0);
+                        saturation = Math.Min(saturation, 1.0); // Limit values
+                    }
+                    else
+                    {
+                        saturation += (sFactor / 10.0);
+                        saturation = Math.Max(saturation, 0.0); // Limit values
+                    }
+                        
 
                     Color newPixel = ColorFromHSV(hue, saturation, value);
                     output.SetPixel(x, y, newPixel);
@@ -300,16 +311,20 @@ namespace ImageFilter
         // Change Gamma
         public static Bitmap Gamma(Bitmap image, double gFactor)
         {
+            if (gFactor == 0) return image;
+            gFactor = -gFactor;
+            if (gFactor < 0) gFactor = -1 / gFactor / 2;
+            else if (gFactor > 0) gFactor = gFactor*4;
+
             Bitmap output = new Bitmap(image.Width, image.Height);
             for (int y = 0; y < image.Height; y++)
             {
                 for (int x = 0; x < image.Width; x++)
                 {
                     Color pixel = image.GetPixel(x, y);
-
-                    int r = (int)(255 * Math.Pow(pixel.R / 255.0, 1 / (gFactor - 1)));
-                    int g = (int)(255 * Math.Pow(pixel.G / 255.0, 1 / (gFactor - 1)));
-                    int b = (int)(255 * Math.Pow(pixel.B / 255.0, 1 / (gFactor - 1)));
+                    int r = (int)(255 * Math.Pow(pixel.R / 255.0, 1 / (gFactor)));
+                    int g = (int)(255 * Math.Pow(pixel.G / 255.0, 1 / (gFactor)));
+                    int b = (int)(255 * Math.Pow(pixel.B / 255.0, 1 / (gFactor)));
 
                     // Clamp values to the range [0, 255]
                     r = Math.Min(255, Math.Max(0, r));
@@ -325,8 +340,9 @@ namespace ImageFilter
         // Change Brightness
         public static Bitmap Brightness(Bitmap image, int bFactor)
         {
+            if (bFactor == 0) return image;
             Bitmap output = new Bitmap(image.Width, image.Height);
-            int brightnessAdjustment = bFactor * 10;
+            int brightnessAdjustment = bFactor * 20;
 
             for (int y = 0; y < image.Height; y++)
             {
@@ -344,6 +360,27 @@ namespace ImageFilter
                     b = Math.Min(255, Math.Max(0, b));
 
                     output.SetPixel(x, y, Color.FromArgb(r, g, b));
+                }
+            }
+            return output;
+        }
+
+        // Convert grayscale
+        public static Bitmap ConvertGrayScale(Bitmap image)
+        {
+            Bitmap output = new Bitmap(image.Width, image.Height);
+            for (int y = 0; y < image.Height; y++)
+            {
+                for (int x = 0; x < image.Width; x++)
+                {
+                    Color pixel = image.GetPixel(x, y);
+                    double hue, saturation, value;
+                    ColorToHSV(pixel, out hue, out saturation, out value);
+
+                    saturation = 0;
+                    
+                    Color newPixel = ColorFromHSV(hue, saturation, value);
+                    output.SetPixel(x, y, newPixel);
                 }
             }
             return output;

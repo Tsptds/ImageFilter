@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Media;
+using System.Reflection.Emit;
 using System.Windows.Forms;
 namespace ImageFilter
 {
@@ -37,19 +38,25 @@ namespace ImageFilter
 
             if (cbx1.Text == "Saturation")
             {
-                IMGout = Util.Saturation(image, sliderIntensity.Value);
+                IMGout = Util.Saturation(image, intensity);
                 if (IMGout == null) return;
                 goto DisplayImage;
             }
             else if (cbx1.Text == "Brightness")
             {
-                IMGout = Util.Brightness(image, sliderIntensity.Value);
+                IMGout = Util.Brightness(image, (int)intensity);
                 if (IMGout == null) return;
                 goto DisplayImage;
             }
             else if (cbx1.Text == "Gamma")
             {
-                IMGout = Util.Gamma(image, sliderIntensity.Value);
+                IMGout = Util.Gamma(image, intensity);
+                if (IMGout == null) return;
+                goto DisplayImage;
+            }
+            else if (cbx1.Text == "Convert to Grayscale")
+            {
+                IMGout = Util.ConvertGrayScale(image);
                 if (IMGout == null) return;
                 goto DisplayImage;
             }
@@ -125,10 +132,49 @@ namespace ImageFilter
 
         private void cbx1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cbx1.Text == "Saturation" || cbx1.Text == "Brightness" || cbx1.Text == "Gamma"){
+            
+            if (cbx1.Text == "Saturation" || cbx1.Text == "Brightness" || cbx1.Text == "Gamma")
+            {
                 optionSlider.Enabled = false;
+                sliderIntensity.Enabled = true;
+                sliderIntensity.Minimum = -5;
+                sliderIntensity.Maximum = 5;
             }
-            else optionSlider.Enabled = true;
+            else if (cbx1.Text == "Box Blur" || cbx1.Text == "Gaussian Blur" || cbx1.Text == "Motion Blur")
+            {
+                sliderIntensity.Maximum = 5;
+                optionSlider.Enabled = true;
+                sliderIntensity.Enabled = true;
+                sliderIntensity.Minimum = 1;
+            }
+            else if (cbx1.Text == "Sharpen")
+            {
+                sliderIntensity.Maximum = 2;
+                optionSlider.Enabled = true;
+                sliderIntensity.Enabled = true;
+                sliderIntensity.Minimum = 1;
+            }
+            else if (cbx1.Text == "Convert to Grayscale")
+            {
+                optionSlider.Enabled = false;
+                sliderIntensity.Enabled = false;
+            }
+            else if(cbx1.Text == "Highlight Edges" || cbx1.Text == "Sobel" || cbx1.Text == "Emboss")
+            {
+                sliderIntensity.Minimum = 1;
+                sliderIntensity.Maximum = 2;
+                optionSlider.Enabled = true;
+                sliderIntensity.Enabled = true;
+            }
+            else
+            {
+                optionSlider.Enabled = false;
+                sliderIntensity.Enabled = false;
+                sliderIntensity.Minimum = 1;
+                sliderIntensity.Maximum = 1;
+            }
+            intensity = sliderIntensity.Value;
+            sliderLabelInt.Text = intensity.ToString();
         }
 
         private void Form1_Load(object sender, EventArgs e)
