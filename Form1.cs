@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Media;
-using System.Reflection.Emit;
 using System.Windows.Forms;
 namespace ImageFilter
 {
